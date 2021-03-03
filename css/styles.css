@@ -1,0 +1,9 @@
+* {
+    box-sizing: border-box;
+}
+  
+body {
+    font: 1em/1.5 'Roboto', sans-serif;
+    color: #4c4c4c;
+    background: #f6f7f7;
+}
