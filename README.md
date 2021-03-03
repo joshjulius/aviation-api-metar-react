@@ -1,2 +1,2 @@
 # aviation-api
- Project using aviationstack API
+METAR decoder using aviationstack API
