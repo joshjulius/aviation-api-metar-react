@@ -4,19 +4,33 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>aviationstack API</title>
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700' rel='stylesheet' type='text/css'>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/styles.css">
   </head>
   <body>
-    <div id="container">
-      <form>
-        <label for="airport-code">ICAO Airport Code:</label>
-        <input type="text" id="airport-code">
-        <button>Decode METAR</button>
-      </form>
-      <div class="results"></div>
-    </div>
+    <header>
+      <div class="header-container">
+        <h1>METAR Decoder</h1>
+        <p>METeorological Aerodome Reports for US airports</p>
+      </div>
+    </header>
+    <main>
+      <div class="main-container">
+        <form>
+          <!-- <label for="airport-code">ICAO Airport Code:</label> -->
+          <input type="text" id="airport-code" placeholder="Enter ICAO Airport Code" maxlength="4">
+          <div class="input-check">
+        
+          </div>
+          <button>Get weather information</button>
+        </form>
+        <div class="results">
+        
+        </div>
+      </div>
+    </main>
     <script src="app.js"></script>
   </body>
 </html>

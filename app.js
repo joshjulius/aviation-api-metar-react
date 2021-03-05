@@ -1,18 +1,33 @@
 const form = document.querySelector('form');
 const input = document.querySelector('input');
+const inputCheck = document.querySelector('.input-check');
 const results = document.querySelector('.results');
 // let decode = [];
 
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
+input.addEventListener('input', (e) => {
     const query = input.value.toUpperCase();
-    
+    inputCheck.style.display = 'inline';
+    if (input.value.length === 4) {
+        fetch(`https://api.aviationapi.com/v1/airports?apt=${query}`)
+            .then(checkStatus)    
+            .then(res => res.json())
+            .then(data => generateAirportName(data[query][0].facility_name))
+            .catch(generateErrorInput());
+    } else if (input.value.length === 0) {
+        inputCheck.style.display = 'none';
+    } else {
+        inputCheck.innerHTML = `<span class="airport-name-invalid">❌ ${e.target.value} does not match any US airport ICAO codes.</span>`;
+    }
+});
+
+form.addEventListener('submit', (e) => {
+    const query = input.value.toUpperCase();
+    e.preventDefault();
     fetch(`https://api.aviationapi.com/v1/weather/metar?apt=${query}`)
         .then(checkStatus)
         .then(res => res.json())
         .then(data => generateHTML(data[query]))
-        .catch(err => generateError(err));
+        .catch(err => generateErrorSubmit(err));
 });
 
 function checkStatus(response) {
@@ -23,9 +38,13 @@ function checkStatus(response) {
     }
 }
 
+function generateAirportName(airport) {
+    inputCheck.innerHTML = `<span class="airport-name-valid">✔️ ${airport}</span>`;
+}
+
 function generateHTML(data) {
     let skyCondition = [];
-    let time = data.time_of_obs.replace('T', ' ').replace('Z', ' UTC');
+    let time = data.time_of_obs.replace('T', ' at ').replace('Z', ' Zulu (UTC)');
     let gust, windDir;
     const gustExists = data.raw.match(/G\d+KT/);
 
@@ -61,7 +80,7 @@ function generateHTML(data) {
     // remarks
     
     input.value = '';
-
+    inputCheck.style.display = 'none';
     console.log(data);
 
     // function checkMatch() {
@@ -89,15 +108,22 @@ function generateHTML(data) {
         <p>Dewpoint: ${data.dewpoint}°C</p>
         <p>Altimeter Setting: ${data.alt_hg} inHg (${data.alt_mb} mb)</p>
     `;
-    
-    
 }
 
-function generateError(err) {
+function generateErrorInput() {
+    inputCheck.innerHTML = `<span class="airport-name-invalid">❌ ${input.value} does not match any US airport ICAO codes.</span>`;
+}
+
+function generateErrorSubmit(err) {
+    if (input.value.length === 0) {
+        inputCheck.style.display = 'inline';
+        inputCheck.innerHTML = `<span class="airport-name-invalid">☝️ Please enter an airport.</span>`;
+    }
+
     if (err.toString().includes(404)) {
-        results.innerHTML = `${err} - METAR not found for ${input.value}.`;
+        results.innerHTML = `<p class="error-msg">⚠️ ${err} - No METAR found for ${input.value}.</p>`;
     } else {
-    results.innerHTML = `${err}`;
+        results.innerHTML = `<p class="error-msg">⚠️ ${err}</p>`;
     }
 }
 
