@@ -63,13 +63,12 @@ DISPLAY AIRPORT NAME AND CITY
 ------------------*/
 form.addEventListener('submit', () => {
     const query = input.value.toUpperCase();
-    inputCheck.style.display = 'inline';
     fetch(`https://api.aviationapi.com/v1/airports?apt=${query}`)  
             //SERVER ONLY RETURNS response: ok and status: 200
             .then(res => res.json())
             .then(checkStatusAirport)
             .then(data => displayAirportName(data[query][0].facility_name, data[query][0].city))
-            .catch(err => generateErrorInput(err));
+            .catch(hideAirportName());
 
     function checkStatusAirport(response) {
         if (response[query] === []) {
@@ -98,10 +97,6 @@ function generateAirportName(airport, city) {
     inputCheck.innerHTML = `<span class="form-valid">✔️ ${airport}, ${city}</span>`;
 }
 
-function displayAirportName(airport, city) {
-    airportName.innerHTML = `<p>${airport}, ${city}</p>`;
-}
-
 function generateHTML(data) {
     let skyCondition = [];
     let time = data.time_of_obs.replace('T', ' at ').replace('Z', ' Zulu (UTC)');
@@ -119,7 +114,11 @@ function generateHTML(data) {
     }
 
     if (gustExists) {
-        gust = `Gusting ${gustExists[0][1]}${gustExists[0][2]}`;
+        if (gustExists[0][1] === '0') {
+        gust = `Gusting ${gustExists[0][2]}`;
+        } else {
+        gust = `Gusting ${gustExists[0][1]}${gustExists[0][2]}`; 
+        }
     } else {
         gust = '';
     }
@@ -171,28 +170,39 @@ function generateHTML(data) {
     `;
 
     function addSpan() {
-        let items = data.raw.split(' ');
-        for (let i = 0; i < items.length ; i++) {
-            if (items[i] === data.station_id) {
-                items[i] = `<span class="station-id">${items[i]}</span>`;
-            } else if (items[i].match(/\d{6}Z/)) {
-                items[i] = `<span class="time">${items[i]}</span>`;
-            } else if (items[i].match(/\w*\d{2}KT/)) {
-                items[i] = `<span class="wind">${items[i]}</span>`;
-            } else if (items[i].match(/\d+SM/)) {
-                items[i] = `<span class="visibility">${items[i]}</span>`;
-            } else if (items[i].startsWith('CLR') || items[i].startsWith('FEW') || items[i].startsWith('SCT') || items[i].startsWith('BKN') || items[i].startsWith('OVC')) {
-                items[i] = `<span class="sky-condition">${items[i]}</span>`;
-            } else if (items[i].match(/^M?\d{2}\/M?\d{2}$/)) {
-                items[i] = `<span class="temp-dewpoint">${items[i]}</span>`;
-            } else if (items[i].match(/A\d{4}/)) {
-                items[i] = `<span class="altimeter-setting">${items[i]}</span>`;
+        const skyConditionSpace = data.raw.match(/(CLR|FEW|SCT|BKN|OVC)(\d?){3}/g).join(' ');
+        const skyConditionNoSpace = data.raw.match(/(CLR|FEW|SCT|BKN|OVC)(\d?){3}/g).join('-').toString();
+        let metarItems = data.raw.replace(skyConditionSpace, skyConditionNoSpace).split(' ');
+        console.log(metarItems);
+        for (let i = 0; i < metarItems.length ; i++) {
+            if (metarItems[i] === data.station_id) {
+                metarItems[i] = `<span class="station-id">${metarItems[i]}</span>`;
+            } else if (metarItems[i].match(/\d{6}Z/)) {
+                metarItems[i] = `<span class="time">${metarItems[i]}</span>`;
+            } else if (metarItems[i].match(/\w*\d{2}KT/)) {
+                metarItems[i] = `<span class="wind">${metarItems[i]}</span>`;
+            } else if (metarItems[i].match(/\d+SM/)) {
+                metarItems[i] = `<span class="visibility">${metarItems[i]}</span>`;
+            } else if (metarItems[i].startsWith('CLR') || metarItems[i].startsWith('FEW') || metarItems[i].startsWith('SCT') || metarItems[i].startsWith('BKN') || metarItems[i].startsWith('OVC')) {
+                metarItems[i] = `<span class="sky-condition">${metarItems[i].replace(/-/g,' ')}</span>`;
+            } else if (metarItems[i].match(/^M?\d{2}\/M?\d{2}$/)) {
+                metarItems[i] = `<span class="temp-dewpoint">${metarItems[i]}</span>`;
+            } else if (metarItems[i].match(/A\d{4}/)) {
+                metarItems[i] = `<span class="altimeter-setting">${metarItems[i]}</span>`;
             } else {
-            items[i] = `<span>${items[i]}</span>`;
+            metarItems[i] = `<span>${metarItems[i]}</span>`;
             }
         }
-        return items.join(' ');
+        return metarItems.join(' ');
     }
+}
+
+function displayAirportName(airport, city) {
+    airportName.innerHTML = `<p>${airport}, ${city}</p>`;
+}
+
+function hideAirportName() {
+    airportName.innerHTML = ``;
 }
 
 function generateErrorInput(err) {
@@ -210,9 +220,9 @@ function generateErrorSubmit(err) {
     }
 
     if (err.toString().includes(404)) {
-        results.innerHTML = `<p class="error-msg">⚠️ ${err} - No METAR found for ${input.value}.</p>`;
+        results.innerHTML = `<p id="error-msg">⚠️ ${err} - No METAR found for ${input.value}.</p>`;
     } else {
-        results.innerHTML = `<p class="error-msg">⚠️ ${err}</p>`;
+        results.innerHTML = `<p id="error-msg">⚠️ ${err}</p>`;
     }
 }
 

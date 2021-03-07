@@ -88,7 +88,7 @@ button:active {
     color: rgb(255, 211, 117);
 }
 
-.error-msg {
+#error-msg {
     color: red;
 }
 
