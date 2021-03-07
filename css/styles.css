@@ -5,6 +5,7 @@
 body {
     font: 1em/1.5 'Nunito', sans-serif;
     color: #001a41;
+    background-color: rgb(241, 241, 241);
 }
 
 header {
@@ -33,7 +34,7 @@ h1 {
 }
 
 input {
-    background-color: rgb(230, 230, 230);
+    background-color: rgb(212, 212, 212);
     text-indent: 10px;
 }
 
@@ -44,7 +45,8 @@ input, button {
     height: 40px;
 }
 
-.airport-name-valid {
+.form-valid {
+    font-size: 0.7em;
     margin: 0;
     padding: 0 10px;
     color: rgb(0, 109, 0);
@@ -52,7 +54,17 @@ input, button {
     border-radius: 5px;
 }
 
-.airport-name-invalid {
+.form-typing {
+    font-size: 0.7em;
+    margin: 0;
+    padding: 0 10px;
+    color: rgb(212, 113, 0);
+    background-color: rgb(255, 234, 167);
+    border-radius: 5px;
+}
+
+.form-invalid {
+    font-size: 0.7em;
     margin: 0;
     padding: 0 10px;
     color: rgb(212, 0, 0);
@@ -66,6 +78,49 @@ button {
     color: white;
 }
 
+button:hover {
+    cursor: pointer;
+    background-color: rgb(0, 43, 100);
+}
+
+button:active {
+    background-color: rgb(0, 43, 100);
+    color: rgb(255, 211, 117);
+}
+
 .error-msg {
     color: red;
 }
+
+.airport-name p {
+    margin-bottom: 0px;
+    border-bottom: 1px solid #001a41;
+}
+
+#raw-metar span {
+    cursor: pointer;
+}
+
+#decoded-metar p {
+    cursor: pointer;
+}
+
+.active {
+    color: rgb(206, 141, 0);
+}
+
+.label-sticker {
+    color: white;
+    background-color: tomato;
+    border-radius: 5px;
+    padding: 0px 5px;
+}
+
+.label-bold {
+    color: tomato;
+    font-weight: bold;
+}
+
+/* ANIMATE FADE HIGHLIGHTS AND LABELS */
+
+/* MEDIA QUERIES*/
