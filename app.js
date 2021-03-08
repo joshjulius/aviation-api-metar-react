@@ -3,7 +3,6 @@ const input = document.querySelector('input');
 const inputCheck = document.querySelector('.input-check');
 const airportName = document.querySelector('.airport-name');
 const results = document.querySelector('#results');
-// let decode = [];
 
 
 /* -----------------
@@ -103,27 +102,26 @@ function generateHTML(data) {
     let gust, windDir;
     const gustExists = data.raw.match(/G\d+KT/);
 
-    // check for AUTO
-
     if (data.raw.includes('VRB')) {
         windDir = 'Variable'
     } else if (data.raw.includes('00000KT')) {
         windDir = 'Not Applicable (Calm)'
+    } else if (data.raw.match(/\d{3}V\d{3}/)) {
+        let windVarChar = data.raw.match(/\d{3}V\d{3}/)[0];
+        windDir = `${data.wind} Degrees, variable from ${windVarChar[0]}${windVarChar[1]}${windVarChar[2]} to ${windVarChar[4]}${windVarChar[5]}${windVarChar[6]} Degrees`;
     } else {
         windDir = `${data.wind} Degrees`;
     }
 
     if (gustExists) {
         if (gustExists[0][1] === '0') {
-        gust = `Gusting ${gustExists[0][2]}`;
+        gust = `Gusting to ${gustExists[0][2]}`;
         } else {
-        gust = `Gusting ${gustExists[0][1]}${gustExists[0][2]}`; 
+        gust = `Gusting to ${gustExists[0][1]}${gustExists[0][2]}`; 
         }
     } else {
         gust = '';
     }
-
-    // check for rn sn br fg etc.
 
     if (data.sky_conditions[0].coverage === "CLR") {
         skyCondition = ['Clear'];
@@ -135,24 +133,10 @@ function generateHTML(data) {
             skyCondition.push(condition);
         }
     }
-
-    // remarks
     
     input.value = '';
     inputCheck.style.display = 'none';
     console.log(data);
-
-    // function checkMatch() {
-    //     const metar = data.raw.split(/[^A-Z]/g);
-    //     for (let i = 0 ; i < abbreviations.length; i++) {
-    //         if (metar.includes(abbreviations[i])) {
-    //             decode.push(meaning[abbreviations[i]]);
-    //         }
-    //     }
-    //     console.log(metar);
-    //     console.log(decode);
-    // }
-    // checkMatch();
 
     results.innerHTML = `
         <div id="raw-metar">
@@ -170,17 +154,19 @@ function generateHTML(data) {
     `;
 
     function addSpan() {
+        const windSpace = data.raw.match(/\d{5}G?\d?\d?KT(.?\d{3}V\d{3})?/g).join(' ');
+        const windNoSpace = data.raw.match(/\d{5}G?\d?\d?KT(.?\d{3}V\d{3})?/g).join().replace(' ', '-');
         const skyConditionSpace = data.raw.match(/(CLR|FEW|SCT|BKN|OVC)(\d?){3}/g).join(' ');
         const skyConditionNoSpace = data.raw.match(/(CLR|FEW|SCT|BKN|OVC)(\d?){3}/g).join('-').toString();
-        let metarItems = data.raw.replace(skyConditionSpace, skyConditionNoSpace).split(' ');
+        let metarItems = data.raw.replace(windSpace, windNoSpace).replace(skyConditionSpace, skyConditionNoSpace).split(' ');
         console.log(metarItems);
         for (let i = 0; i < metarItems.length ; i++) {
             if (metarItems[i] === data.station_id) {
                 metarItems[i] = `<span class="station-id">${metarItems[i]}</span>`;
             } else if (metarItems[i].match(/\d{6}Z/)) {
                 metarItems[i] = `<span class="time">${metarItems[i]}</span>`;
-            } else if (metarItems[i].match(/\w*\d{2}KT/)) {
-                metarItems[i] = `<span class="wind">${metarItems[i]}</span>`;
+            } else if (metarItems[i].match(/\d{5}G?\d?\d?KT(.?\d{3}V\d{3})?/g)) {
+                metarItems[i] = `<span class="wind">${metarItems[i].replace(/-/g, ' ')}</span>`;
             } else if (metarItems[i].match(/\d+SM/)) {
                 metarItems[i] = `<span class="visibility">${metarItems[i]}</span>`;
             } else if (metarItems[i].startsWith('CLR') || metarItems[i].startsWith('FEW') || metarItems[i].startsWith('SCT') || metarItems[i].startsWith('BKN') || metarItems[i].startsWith('OVC')) {
