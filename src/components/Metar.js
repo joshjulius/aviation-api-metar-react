@@ -1,18 +1,27 @@
 import React from 'react';
 
-const Metar = () => {
-    
-    
-    
+import Raw from './Raw';
+
+const Metar = (props) => {
+
+    console.log(props.data);
+
     return (
-        <React.Fragment>
+        <>
             <div className="airport-name">
-                
+            {props.airportName}
             </div>
             <div id="results">
-            
+                <div id="raw-metar">
+                    <h4>
+                        {/* <Raw data={props.data}/> */}
+                    </h4>
+                </div>
+                <div id="decoded-metar">
+
+                </div>
             </div>
-        </React.Fragment>
+        </>
     );
 }
 
