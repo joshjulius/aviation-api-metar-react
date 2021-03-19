@@ -1,19 +1,18 @@
 import React from 'react';
 
-import Raw from './Raw';
+// import Raw from './Raw';
 
 const Metar = (props) => {
-
-    console.log(props.data);
-
+    
     return (
         <>
             <div className="airport-name">
-            {props.airportName}
+                {props.airportName}
             </div>
             <div id="results">
                 <div id="raw-metar">
                     <h4>
+                        {props.data.raw}
                         {/* <Raw data={props.data}/> */}
                     </h4>
                 </div>
