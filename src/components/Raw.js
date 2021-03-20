@@ -2,9 +2,11 @@ import React from 'react';
 
 const Raw = (props) => {
 
+    console.log(props.data.raw);
+
     function addSpan(data) {
-        const windSpace = data.raw.match(/\d{5}G?\d?\d?KT(.?\d{3}V\d{3})?/g).join(' ');
-        const windNoSpace = data.raw.match(/\d{5}G?\d?\d?KT(.?\d{3}V\d{3})?/g).join().replace(' ', '-');
+        const windSpace = data.raw.match(/(\d{5}|VRB\d{2})G?\d?\d?KT(.?\d{3}V\d{3})?/g).join(' ');
+        const windNoSpace = data.raw.match(/(\d{5}|VRB\d{2})G?\d?\d?KT(.?\d{3}V\d{3})?/g).join().replace(' ', '-');
         const skyConditionSpace = data.raw.match(/(CLR|FEW|SCT|BKN|OVC)(\d?){3}/g).join(' ');
         const skyConditionNoSpace = data.raw.match(/(CLR|FEW|SCT|BKN|OVC)(\d?){3}/g).join('-').toString();
         let metarItems = data.raw.replace(windSpace, windNoSpace).replace(skyConditionSpace, skyConditionNoSpace).split(' ');
@@ -14,7 +16,7 @@ const Raw = (props) => {
                 return (<span className="station-id">{item}&nbsp;</span>);
             } else if (item.match(/\d{6}Z/)) {
                 return (<span className="time">{item}&nbsp;</span>);
-            } else if (item.match(/\d{5}G?\d?\d?KT(.?\d{3}V\d{3})?/g)) {
+            } else if (item.match(/(\d{5}|VRB\d{2})G?\d?\d?KT(.?\d{3}V\d{3})?/g)) {
                 return (<span className="wind">{item.replace(/-/g, ' ')}&nbsp;</span>);
             } else if (item.match(/\d+SM/)) {
                 return (<span className="visibility">{item}&nbsp;</span>);

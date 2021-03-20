@@ -55,7 +55,7 @@ const Main = () => {
     }, [query]);
 
     let message;
-    if (query == '') {
+    if (query === '') {
         message = '';
     } else if (error.toString().includes('Error')) {
         message = error
@@ -64,8 +64,6 @@ const Main = () => {
     } else {
         message = data;
     }
-
-    console.log(message);
 
     return (
         <main>

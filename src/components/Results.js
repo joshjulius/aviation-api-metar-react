@@ -6,7 +6,9 @@ import ErrorFetch from './ErrorFetch'
 
 const Results = (props) => {
 
-    if (props.data === 'Loading...') {
+    if (props.data === '') {
+        return(null);
+    } else if (props.data === 'Loading...') {
         return (
             <Loading data={props.data} />
         );
