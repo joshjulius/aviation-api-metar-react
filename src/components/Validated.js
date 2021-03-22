@@ -10,7 +10,7 @@ const Validated = (props) => {
 
     useEffect(() => {
             
-        const URL = `https://api.aviationapi.com/v1/airports?apt=${props.value}`;
+        const URL = `https://cors.bridged.cc/https://api.aviationapi.com/v1/airports?apt=${props.value};`
 
         axios.get(URL)  
         //SERVER ONLY RETURNS response: ok and status: 200

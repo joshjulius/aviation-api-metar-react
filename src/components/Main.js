@@ -19,8 +19,8 @@ const Main = () => {
 
     useEffect(() => {
 
-        const metarURL = `https://api.aviationapi.com/v1/weather/metar?apt=${query}`;
-        const airportNameURL = `https://api.aviationapi.com/v1/airports?apt=${query}`;
+        const metarURL = `https://cors.bridged.cc/https://api.aviationapi.com/v1/weather/metar?apt=${query};`
+        const airportNameURL = `https://cors.bridged.cc/https://api.aviationapi.com/v1/airports?apt=${query};`
 
         if (query !== '') {
 
