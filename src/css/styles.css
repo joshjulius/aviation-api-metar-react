@@ -25,11 +25,8 @@ header {
     margin: 0 auto;
 }
 
-h1 {
-    margin: 0;
-}
-
-.header-container p {
+h1,
+.header-container p{
     margin: 0;
 }
 
@@ -105,15 +102,14 @@ button:active {
     border-bottom: 1px solid #001a41;
 }
 
-#raw-metar span {
-    cursor: pointer;
-}
-
+#raw-metar span,
 #decoded-metar p {
     cursor: pointer;
 }
 
-#raw-metar span:not([class]) {
+#raw-metar span:not([class]),
+#raw-metar .label-sticker:hover,
+#decoded-metar .label-bold:hover {
     cursor: default;
 }
 
@@ -138,14 +134,6 @@ p:not(.active) {
 .label-bold {
     color: tomato;
     font-weight: bold;
-}
-
-#raw-metar .label-sticker:hover {
-    cursor: default;
-}
-
-#decoded-metar .label-bold:hover {
-    cursor: default;
 }
 
 footer {

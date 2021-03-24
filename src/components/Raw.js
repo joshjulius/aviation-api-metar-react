@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
-const Raw = (props) => {
+import { AppContext } from './context';
 
-    console.log(props.data.raw);
+const Raw = () => {
+
+    const { message } = useContext(AppContext);
 
     function addSpan(data) {
         const windSpace = data.raw.match(/(\d{5}|VRB\d{2})G?\d?\d?KT(.?\d{3}V\d{3})?/g).join(' ');
@@ -35,7 +37,7 @@ const Raw = (props) => {
     }
 
     return (
-        addSpan(props.data)
+        addSpan(message)
     );
 
 }

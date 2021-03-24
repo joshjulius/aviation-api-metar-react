@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
-const Loading = (props) => {
-    return <p>{props.data}</p>
+import { AppContext } from './context';
+
+const Loading = () => {
+    const {message} = useContext(AppContext);
+    return <p>{message}</p>
 }
 
 export default Loading;

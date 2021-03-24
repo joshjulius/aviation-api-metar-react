@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
-const ErrorFetch = (props) => {
+import { AppContext } from './context';
 
-    if (props.data.includes('404')) {
-        return <p id="error-msg">⚠️ {props.data} - No METAR found for {props.icao}.</p>;
+const ErrorFetch = () => {
+
+    const { message, query } = useContext(AppContext);
+
+    if (message.includes('404')) {
+        return <p id="error-msg">⚠️ {message} - No METAR found for {query}.</p>;
     } else {
-        return <p id="error-msg">⚠️ {props.data}.</p>;
+        return <p id="error-msg">⚠️ {message}.</p>;
     }
 
 }

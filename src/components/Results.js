@@ -1,30 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
+import { AppContext } from './context/';
 import Metar from './Metar';
 import Loading from './Loading';
 import ErrorFetch from './ErrorFetch'
 
-const Results = (props) => {
+const Results = () => {
 
-    if (props.data === '') {
+    const { message } = useContext(AppContext);
+
+    if (message === '') {
         return(null);
-    } else if (props.data === 'Loading...') {
+    } else if (message === 'Loading...') {
         return (
-            <Loading data={props.data} />
+            <Loading />
         );
-    } else if (props.data.toString().includes('Error')) {
+    } else if (message.toString().includes('Error')) {
         return (
-            <ErrorFetch
-                data={props.data}
-                icao={props.icao}
-            />
+            <ErrorFetch />
             );
     } else {
         return (
-            <Metar
-                data={props.data}
-                airportName={props.airportName}
-            />
+            <Metar />
         );
     }
     

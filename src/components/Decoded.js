@@ -1,23 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
-const Decoded = (props) => {
+import { AppContext } from './context';
 
-    console.log(props.data);
+const Decoded = () => {
+
+    const { message } = useContext(AppContext);
 
     let skyCondition = [];
-    let time = props.data.time_of_obs.replace('T', ' at ').replace('Z', ' Zulu (UTC)');
+    let time = message.time_of_obs.replace('T', ' at ').replace('Z', ' Zulu (UTC)');
     let gust, windDir;
-    const gustExists = props.data.raw.match(/G\d+KT/);
+    const gustExists = message.raw.match(/G\d+KT/);
 
-    if (props.data.raw.includes('VRB')) {
+    if (message.raw.includes('VRB')) {
         windDir = 'Variable'
-    } else if (props.data.raw.includes('00000KT')) {
+    } else if (message.raw.includes('00000KT')) {
         windDir = 'Not Applicable (Calm)'
-    } else if (props.data.raw.match(/\d{3}V\d{3}/)) {
-        let windVarChar = props.data.raw.match(/\d{3}V\d{3}/)[0];
-        windDir = `${props.data.wind} Degrees, variable from ${windVarChar[0]}${windVarChar[1]}${windVarChar[2]} to ${windVarChar[4]}${windVarChar[5]}${windVarChar[6]} Degrees`;
+    } else if (message.raw.match(/\d{3}V\d{3}/)) {
+        let windVarChar = message.raw.match(/\d{3}V\d{3}/)[0];
+        windDir = `${message.wind} Degrees, variable from ${windVarChar[0]}${windVarChar[1]}${windVarChar[2]} to ${windVarChar[4]}${windVarChar[5]}${windVarChar[6]} Degrees`;
     } else {
-        windDir = `${props.data.wind} Degrees`;
+        windDir = `${message.wind} Degrees`;
     }
 
     if (gustExists) {
@@ -30,12 +32,12 @@ const Decoded = (props) => {
         gust = '';
     }
 
-    if (props.data.sky_conditions[0].coverage === "CLR") {
+    if (message.sky_conditions[0].coverage === "CLR") {
         skyCondition = ['Clear'];
     } else {
-        for (let i = 0; i < props.data.sky_conditions.length; i++) {
-            let base = props.data.sky_conditions[i].base_agl;
-            let coverage = props.data.sky_conditions[i].coverage;
+        for (let i = 0; i < message.sky_conditions.length; i++) {
+            let base = message.sky_conditions[i].base_agl;
+            let coverage = message.sky_conditions[i].coverage;
             let condition = `${base} AGL${coverage}`;
             skyCondition.push(condition);
         }
@@ -43,13 +45,13 @@ const Decoded = (props) => {
 
     return (
         <>
-            <p className="station-id">Airport ID: {props.data.station_id}</p>
+            <p className="station-id">Airport ID: {message.station_id}</p>
             <p className="time">Time of Observation: {time}</p>
-            <p className="wind">Wind Direction / Speed: {windDir} / {props.data.wind_vel} {gust} Knots</p>
-            <p className="visibility">Visibility: {props.data.visibility} Statute Miles</p>
+            <p className="wind">Wind Direction / Speed: {windDir} / {message.wind_vel} {gust} Knots</p>
+            <p className="visibility">Visibility: {message.visibility} Statute Miles</p>
             <p className="sky-condition">Sky Condition: {skyCondition.join(' - ').replace(/FEW/g, " Few").replace(/SCT/g, " Scattered").replace(/BKN/g, " Broken").replace(/OVC/g, " Overcast")}</p>
-            <p className="temp-dewpoint">Temperature / Dewpoint: {props.data.temp}°C / {props.data.dewpoint}°C</p>
-            <p className="altimeter-setting">Altimeter Setting: {props.data.alt_hg} inHg ({props.data.alt_mb} mb)</p>
+            <p className="temp-dewpoint">Temperature / Dewpoint: {message.temp}°C / {message.dewpoint}°C</p>
+            <p className="altimeter-setting">Altimeter Setting: {message.alt_hg} inHg ({message.alt_mb} mb)</p>
         </>
     );
 

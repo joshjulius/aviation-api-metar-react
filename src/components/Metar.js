@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
+import { AppContext } from './context';
 import Raw from './Raw';
 import Decoded from './Decoded';
 
-const Metar = (props) => {
+const Metar = () => {
     
+    const { airportName } = useContext(AppContext);
+
     const highlight = (e) => {
         let hoverTarget = document.getElementsByClassName(e.target.className);
         for (let i = 0; i < hoverTarget.length; i++) {
@@ -37,16 +40,16 @@ const Metar = (props) => {
     return (
         <>
             <div className="airport-name">
-                {props.airportName}
+                {airportName}
             </div>
             <div id="results" onMouseOver={highlight} onMouseOut={removeHighlight} onClick={addLabel}>
                 <div id="raw-metar">
                     <h4>
-                        <Raw data={props.data}/>
+                        <Raw />
                     </h4>
                 </div>
                 <div id="decoded-metar">
-                    <Decoded data={props.data}/>
+                    <Decoded />
                 </div>
             </div>
         </>

@@ -1,8 +1,11 @@
-import React, {useState} from 'react';
+import React, { useState, useContext } from 'react';
 
+import { AppContext } from './context';
 import FormValidation from './FormValidation';
 
-const Search = (props) => {
+const Search = () => {
+
+    const { actions } = useContext(AppContext);
 
     const [searchText, setSearchText] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
@@ -13,14 +16,14 @@ const Search = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        props.checkFetch1(true);
-        props.checkFetch2(true);
+        actions.isFetched1(true);
+        actions.isFetched2(true);
         if (searchText === '') {
             setErrorMessage(<span className="form-invalid">☝️ Please enter an airport.</span>);
         } else {
             setErrorMessage('');
         }
-        props.onSearch(searchText);
+        actions.onSearch(searchText);
         setSearchText('');
     }
 
