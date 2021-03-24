@@ -62,16 +62,37 @@ export const Provider = (props) => {
     } else {
         message = data;
     }
+    
+
+    const [searchText, setSearchText] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const onSearchChange = e => {
+        setSearchText(e.target.value);
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        checkFetch1(true);
+        checkFetch2(true);
+        if (searchText === '') {
+            setErrorMessage(<span className="form-invalid">☝️ Please enter an airport.</span>);
+        } else {
+            setErrorMessage('');
+        }
+        performSearch(searchText);
+        setSearchText('');
+    }
 
     return (
         <AppContext.Provider value={{
             airportName,
             query,
             message,
+            searchText,
+            errorMessage,
             actions: {
-                onSearch: performSearch,
-                isFetched1: checkFetch1,
-                isFetched2: checkFetch2
+                submit: handleSubmit,
+                searchChange: onSearchChange
             }
         }}>
         { props.children }

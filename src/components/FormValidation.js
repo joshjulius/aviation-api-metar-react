@@ -1,26 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
+import { AppContext } from './context';
 import Validated from './Validated';
 
-const FormValidation = (props) => {
+const FormValidation = () => {
 
-    if (props.value === '') {
-        return props.error;
-    } else if (props.value.match(/[^A-Za-z]/)) {
+    const { searchText, errorMessage } = useContext(AppContext);
+    const searchTextUpper = searchText.toUpperCase();
+
+    if (searchTextUpper === '') {
+        return errorMessage;
+    } else if (searchTextUpper.match(/[^A-Za-z]/)) {
         return (
             <span className="form-invalid">❌ Please enter alphabet characters only.</span>
         );
-    } else if (!props.value.startsWith('K') && !props.value.startsWith('N') && !props.value.startsWith('P') && !props.value.startsWith('T')) {
+    } else if (!searchTextUpper.startsWith('K') && !searchTextUpper.startsWith('N') && !searchTextUpper.startsWith('P') && !searchTextUpper.startsWith('T')) {
         return(
             <span className="form-invalid">❌ US ICAO airport codes begin with K, N, P, or T.</span>
         );
-    } else if (props.value.length === 4) {
+    } else if (searchTextUpper.length === 4) {
         return <Validated
-                    value={props.value}
+                    value={searchTextUpper}
                 />;    
     } else {
         return (
-            <span className="form-typing">✏️ {props.value}</span>
+            <span className="form-typing">✏️ {searchTextUpper}</span>
         );
     }
 
