@@ -1,0 +1,38 @@
+.airportName p {
+    margin-bottom: 0px;
+    border-bottom: 1px solid var(--primary-color);
+}
+
+.active {
+    color: rgb(5, 187, 157);
+    transition: 250ms;
+}
+
+.labelSticker {
+    color: white;
+    background-color: tomato;
+    border-radius: 5px;
+    padding: 0px 1px 0px 5px;
+    margin-right: 4px;
+}
+
+.labelBold {
+    color: tomato;
+    font-weight: bold;
+}
+
+#rawMetar span,
+#decodedMetar p {
+    cursor: pointer;
+}
+
+#rawMetar span:not([class]),
+#rawMetar .labelSticker:hover,
+#decodedMetar .labelBold:hover {
+    cursor: default;
+}
+
+span:not(.active),
+p:not(.active) {
+    transition: 250ms;
+}

@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
+import styles from "./Search.module.css";
 
-import { AppContext } from './context';
-import FormValidation from './FormValidation';
+import { AppContext } from '../context';
+import FormValidation from '../FormValidation/FormValidation';
 
 const Search = () => {
 
@@ -17,7 +18,7 @@ const Search = () => {
                 value={searchText.toUpperCase()}
                 onChange={actions.searchChange}
             />
-            <div className="input-check">
+            <div className={styles.inputCheck}>
                 <FormValidation />
             </div>
             <button>Get weather information</button>

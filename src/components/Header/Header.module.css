@@ -1,0 +1,15 @@
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px;
+}
+
+.headerContainer {
+    width: 90%;
+    margin: 0 auto;
+}
+
+h1,
+.headerContainer p{
+    margin: 0;
+}

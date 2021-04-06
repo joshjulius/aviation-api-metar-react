@@ -1,0 +1,19 @@
+* {
+    box-sizing: border-box;
+}
+ 
+body {
+    font: 1em/1.5 'Nunito', sans-serif;
+    color: var(--primary-color);
+    background-color: rgb(241, 241, 241);
+}
+
+#root {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+
+:root {
+    --primary-color: #001a41;
+}

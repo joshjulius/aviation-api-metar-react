@@ -1,0 +1,58 @@
+input {
+    background-color: rgb(212, 212, 212);
+    text-indent: 10px;
+    padding: 0px;
+}
+
+input, button {
+    border-radius: 5px;
+    border-width: 0px;
+    width: 100%;
+    height: 40px;
+}
+
+button {
+    margin-top: 10px;
+    background-color: var(--primary-color);
+    color: white;
+    transition: background-color 250ms;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: rgb(0, 54, 126);
+}
+
+button:active {
+    background-color: rgb(0, 43, 100);
+    color: rgb(255, 230, 176);
+}
+
+@media (min-width: 768px) {
+
+    form {
+        display: grid;
+        grid-template-columns: 70% 30%;
+        grid-template-areas:
+            "input button"
+            "validate validate";
+    }
+
+    input {
+        grid-area: input;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+
+    .inputCheck {
+        grid-area: validate;
+    }
+
+    button {
+        grid-area: button;
+        margin: 0px;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+    
+}

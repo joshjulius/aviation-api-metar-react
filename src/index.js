@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { Provider } from './components/context';
-import './css/normalize.css';
-import './css/styles.css';
-import App from './components/App';
+import './normalize.css';
+import './index.css';
+import App from './App';
 
 ReactDOM.render(
   <Provider>

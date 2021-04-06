@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import styles from "./Validated.module.css";
 import axios from 'axios';
 
 const Validated = (props) => {
@@ -26,14 +27,14 @@ const Validated = (props) => {
     }, [props.value]);
 
     if (!isFetching) {
-        return <span className="form-typing">✏️ {props.value} - Checking...</span>
+        return <span className={styles.formTyping}>✏️ {props.value} - Checking...</span>
     } else if (error.includes('TypeError')) {
-        return <span className="form-invalid">❌ {props.value.toUpperCase()} does not match any US ICAO airport code.</span>
+        return <span className={styles.formInvalid}>❌ {props.value.toUpperCase()} does not match any US ICAO airport code.</span>
     } else if (error.includes('Network Error')) {
-        return <span className="form-invalid">❌ Unable to validate - {error}</span>
+        return <span className={styles.formInvalid}>❌ Unable to validate - {error}</span>
     } else {
         return (
-            <span className="form-valid">✔️ {airport} - {city}</span>
+            <span className={styles.formValid}>✔️ {airport} - {city}</span>
         );
     }
 

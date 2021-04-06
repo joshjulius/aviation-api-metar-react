@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
+import styles from "./FormValidation.module.css";
 
-import { AppContext } from './context';
-import Validated from './Validated';
+import { AppContext } from '../context';
+import Validated from '../Validated/Validated';
 
 const FormValidation = () => {
 
@@ -12,11 +13,11 @@ const FormValidation = () => {
         return errorMessage;
     } else if (searchTextUpper.match(/[^A-Za-z]/)) {
         return (
-            <span className="form-invalid">❌ Please enter alphabet characters only.</span>
+            <span className={styles.formInvalid}>❌ Please enter alphabet characters only.</span>
         );
     } else if (!searchTextUpper.startsWith('K') && !searchTextUpper.startsWith('N') && !searchTextUpper.startsWith('P') && !searchTextUpper.startsWith('T')) {
         return(
-            <span className="form-invalid">❌ US ICAO airport codes begin with K, N, P, or T.</span>
+            <span className={styles.formInvalid}>❌ US ICAO airport codes begin with K, N, P, or T.</span>
         );
     } else if (searchTextUpper.length === 4) {
         return <Validated
@@ -24,7 +25,7 @@ const FormValidation = () => {
                 />;    
     } else {
         return (
-            <span className="form-typing">✏️ {searchTextUpper}</span>
+            <span className={styles.formTyping}>✏️ {searchTextUpper}</span>
         );
     }
 

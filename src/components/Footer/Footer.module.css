@@ -1,0 +1,17 @@
+footer {
+    height: 100px;
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.footerContainer {
+    width: 90%;
+    margin: 0 auto;
+    display: grid;
+    height: 100%;
+}
+
+footer p {
+    align-self: center;
+    font-size: 0.8em;
+}

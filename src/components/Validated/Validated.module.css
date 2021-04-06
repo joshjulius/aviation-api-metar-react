@@ -1,0 +1,26 @@
+.formValid {
+    font-size: 0.7em;
+    margin: 0px;
+    padding: 5px 10px;
+    color: rgb(0, 109, 0);
+    background-color: rgb(226, 255, 226);
+    border-radius: 5px;
+}
+
+.formTyping {
+    font-size: 0.7em;
+    margin: 0px;
+    padding: 5px 10px;
+    color: rgb(212, 113, 0);
+    background-color: rgb(255, 234, 167);
+    border-radius: 5px;
+}
+
+.formInvalid {
+    font-size: 0.7em;
+    margin: 0px;
+    padding: 5px 10px;
+    color: rgb(212, 0, 0);
+    background-color: rgb(255, 231, 231);
+    border-radius: 5px;
+}
