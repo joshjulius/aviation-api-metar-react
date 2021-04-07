@@ -43,14 +43,14 @@ const Metar = () => {
             <div className={styles.airportName}>
                 {airportName}
             </div>
-            <div id="results" onMouseOver={highlight} onMouseOut={removeHighlight} onClick={addLabel}>
+            <div id="results">
                 <div id={styles.rawMetar}>
                     <h4>
-                        <Raw />
+                        <Raw highlight={highlight} removeHighlight={removeHighlight} addLabel={addLabel}/>
                     </h4>
                 </div>
                 <div id={styles.decodedMetar}>
-                    <Decoded />
+                    <Decoded highlight={highlight} removeHighlight={removeHighlight} addLabel={addLabel}/>
                 </div>
             </div>
         </>

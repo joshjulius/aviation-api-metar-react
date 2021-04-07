@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 
 import { AppContext } from '../context';
 
-const Decoded = () => {
+const Decoded = (props) => {
 
     const { message } = useContext(AppContext);
 
@@ -45,13 +45,13 @@ const Decoded = () => {
 
     return (
         <>
-            <p className="station-id">Airport ID: {message.station_id}</p>
-            <p className="time">Time of Observation: {time}</p>
-            <p className="wind">Wind Direction / Speed: {windDir} / {message.wind_vel} {gust} Knots</p>
-            <p className="visibility">Visibility: {message.visibility} Statute Miles</p>
-            <p className="sky-condition">Sky Condition: {skyCondition.join(' - ').replace(/FEW/g, " Few").replace(/SCT/g, " Scattered").replace(/BKN/g, " Broken").replace(/OVC/g, " Overcast")}</p>
-            <p className="temp-dewpoint">Temperature / Dewpoint: {message.temp}°C / {message.dewpoint}°C</p>
-            <p className="altimeter-setting">Altimeter Setting: {message.alt_hg} inHg ({message.alt_mb} mb)</p>
+            <p className="station-id" onMouseOver={props.highlight} onMouseOut={props.removeHighlight} onClick={props.addLabel}>Airport ID: {message.station_id}</p>
+            <p className="time" onMouseOver={props.highlight} onMouseOut={props.removeHighlight} onClick={props.addLabel}>Time of Observation: {time}</p>
+            <p className="wind" onMouseOver={props.highlight} onMouseOut={props.removeHighlight} onClick={props.addLabel}>Wind Direction / Speed: {windDir} / {message.wind_vel} {gust} Knots</p>
+            <p className="visibility" onMouseOver={props.highlight} onMouseOut={props.removeHighlight} onClick={props.addLabel}>Visibility: {message.visibility} Statute Miles</p>
+            <p className="sky-condition" onMouseOver={props.highlight} onMouseOut={props.removeHighlight} onClick={props.addLabel}>Sky Condition: {skyCondition.join(' - ').replace(/FEW/g, " Few").replace(/SCT/g, " Scattered").replace(/BKN/g, " Broken").replace(/OVC/g, " Overcast")}</p>
+            <p className="temp-dewpoint" onMouseOver={props.highlight} onMouseOut={props.removeHighlight} onClick={props.addLabel}>Temperature / Dewpoint: {message.temp}°C / {message.dewpoint}°C</p>
+            <p className="altimeter-setting" onMouseOver={props.highlight} onMouseOut={props.removeHighlight} onClick={props.addLabel}>Altimeter Setting: {message.alt_hg} inHg ({message.alt_mb} mb)</p>
         </>
     );
 
