@@ -15,8 +15,8 @@ const Decoded = (props) => {
         windDir = 'Variable'
     } else if (message.raw.includes('00000KT')) {
         windDir = 'Not Applicable (Calm)'
-    } else if (message.raw.match(/\d{3}V\d{3}/)) {
-        let windVarChar = message.raw.match(/\d{3}V\d{3}/)[0];
+    } else if (message.raw.match(/^\d{3}V\d{3}$/)) {
+        let windVarChar = message.raw.match(/^\d{3}V\d{3}$/)[0];
         windDir = `${message.wind} Degrees, variable from ${windVarChar[0]}${windVarChar[1]}${windVarChar[2]} to ${windVarChar[4]}${windVarChar[5]}${windVarChar[6]} Degrees`;
     } else {
         windDir = `${message.wind} Degrees`;
