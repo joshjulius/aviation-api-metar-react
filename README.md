@@ -23,7 +23,7 @@ Try searching for:
 - PHNL
 - Or any other [USA ICAO Airport codes](https://en.wikipedia.org/wiki/List_of_airports_in_the_United_States).
 
-## What I learned by building this project:
+## What I learned by building this project
 - JS (ES6)
   - Querying
   - Event listeners
