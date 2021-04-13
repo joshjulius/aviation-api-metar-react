@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/aviation-api-metar-react/static/css/main.c4ce1418.chunk.css",
+    "main.js": "/aviation-api-metar-react/static/js/main.e1754a59.chunk.js",
+    "main.js.map": "/aviation-api-metar-react/static/js/main.e1754a59.chunk.js.map",
+    "runtime-main.js": "/aviation-api-metar-react/static/js/runtime-main.737848d3.js",
+    "runtime-main.js.map": "/aviation-api-metar-react/static/js/runtime-main.737848d3.js.map",
+    "static/js/2.d1b448db.chunk.js": "/aviation-api-metar-react/static/js/2.d1b448db.chunk.js",
+    "static/js/2.d1b448db.chunk.js.map": "/aviation-api-metar-react/static/js/2.d1b448db.chunk.js.map",
+    "index.html": "/aviation-api-metar-react/index.html",
+    "static/css/main.c4ce1418.chunk.css.map": "/aviation-api-metar-react/static/css/main.c4ce1418.chunk.css.map",
+    "static/js/2.d1b448db.chunk.js.LICENSE.txt": "/aviation-api-metar-react/static/js/2.d1b448db.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.737848d3.js",
+    "static/js/2.d1b448db.chunk.js",
+    "static/css/main.c4ce1418.chunk.css",
+    "static/js/main.e1754a59.chunk.js"
+  ]
+}
