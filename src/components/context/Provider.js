@@ -28,7 +28,8 @@ export const Provider = (props) => {
                     const metar = await axios.get(metarURL);
                     console.log(metar);
                     setError('');
-                    setData(metar.data[query]);
+                    const metarJSON = metar.data[query];
+                    setData(metarJSON);
                     setIsFetching1(false);
                 } catch (err) {
                     setError(err.toString());

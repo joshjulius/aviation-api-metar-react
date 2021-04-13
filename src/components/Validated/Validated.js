@@ -29,6 +29,12 @@ const Validated = (props) => {
         
         fetchAirportName();
 
+        return () => {
+            setAirport('');
+            setCity('');
+            setIsFetching(true);
+        }
+
     }, [props.value]);
 
     if (!isFetching) {
