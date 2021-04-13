@@ -42,3 +42,8 @@ Try searching for:
 
 ## API Credit
 I used [Aviation API](https://www.aviationapi.com/) to fetch the data needed for the webapp.
+
+## What I would like to do next
+- [ ] localStorage, so users could see their history of recently searched aerodromes.
+- [ ] Complete the testing.
+- [ ] Improve the UI.
