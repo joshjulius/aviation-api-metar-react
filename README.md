@@ -34,8 +34,10 @@ Try searching for:
 - axios
   - async/await syntax
   - Fetching data and then displaying the data/error
-- Regular expressions
 - File organization
+  - imports/exports
+  - Using CSS modules
+- Regular expressions
 - Form validation
 - Basic npm commands
 - Basic integration and unit tests
