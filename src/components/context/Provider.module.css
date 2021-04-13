@@ -1,0 +1,8 @@
+.formInvalid {
+    font-size: 0.7em;
+    margin: 0px;
+    padding: 5px 10px;
+    color: rgb(212, 0, 0);
+    background-color: rgb(255, 231, 231);
+    border-radius: 5px;
+}

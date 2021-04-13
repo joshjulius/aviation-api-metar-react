@@ -1,3 +1,5 @@
+export { Provider } from "./context";
+export { AppContext } from "./context";
 export { default as Decoded } from "./Decoded";
 export { default as ErrorFetch } from "./ErrorFetch";
 export { default as Footer } from "./Footer";

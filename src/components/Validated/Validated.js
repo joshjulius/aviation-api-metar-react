@@ -13,17 +13,22 @@ const Validated = (props) => {
             
         const URL = `https://cors.bridged.cc/https://api.aviationapi.com/v1/airports?apt=${props.value};`
 
-        axios.get(URL)  
-        //SERVER ONLY RETURNS response: ok and status: 200
-        .then(data => {
-            setAirport(data.data[props.value][0].facility_name);
-            setCity(data.data[props.value][0].city);
-            setIsFetching(true);
-        })
-        .catch(err => {
-            setError(err.toString());
-            setIsFetching(true);
-        })
+        const fetchAirportName = async () => {
+            try {
+                const airportData = await axios.get(URL);
+                const facilityName = airportData.data[props.value][0].facility_name;
+                setAirport(facilityName);
+                const city = airportData.data[props.value][0].city;
+                setCity(city);
+                setIsFetching(true);
+            } catch (err) {
+                setError(err.toString());
+                setIsFetching(true);
+            }
+        }
+        
+        fetchAirportName();
+
     }, [props.value]);
 
     if (!isFetching) {
