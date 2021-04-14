@@ -6,7 +6,7 @@ Meteorological Aerodrome Report.
 It is an aerodrome-specific routine weather report issued hourly either by a human observer or an automated system. Pilots use this information to check what the latest weather is like in the vicinity of the aerodrome.
 
 ## What does a METAR look like?
-From [NOAA](https://www.aviationweather.gov/metar/data?ids=ksfo&format=decoded&date=&hours=0):
+From [NWS (National Weather Service)](https://www.aviationweather.gov/metar/data?ids=ksfo&format=decoded&date=&hours=0):
 
 ![metar](https://user-images.githubusercontent.com/42055941/114629451-3392c080-9c7e-11eb-8952-46d914c44e6f.png)
 
